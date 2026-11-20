@@ -87,7 +87,10 @@ echo "==> @barmanji/$PROJECT (launcher)"
 mkdir -p "$DIST/launcher"
 sed "s/__VERSION__/$VERSION/g" "$ROOT/npm/package.json" >"$DIST/launcher/package.json"
 cp -R "$ROOT/npm/bin" "$ROOT/npm/lib" "$DIST/launcher/"
-cp "$ROOT/README.md" "$ROOT/LICENSE" "$DIST/launcher/"
+# npm does not render Mermaid, so ship a README without the diagram.
+awk 'BEGIN{skip=0} /^```mermaid/{skip=1;next} skip&&/^```$/{skip=0;next} !skip' \
+	"$ROOT/README.md" | cat -s >"$DIST/launcher/README.md"
+cp "$ROOT/LICENSE" "$DIST/launcher/"
 publish_dir "$DIST/launcher"
 
 echo "published @barmanji/$PROJECT@$VERSION (dist-tag: $DIST_TAG)"

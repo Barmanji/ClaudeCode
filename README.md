@@ -1,4 +1,4 @@
-# C-Lawd Code
+# Clawd Code
 
 A small coding agent for the terminal, written in Go. It sends your prompt to an
 OpenAI-compatible chat API and lets the model read files, write files, and run

@@ -7,9 +7,10 @@ const https = require('node:https')
 const http = require('node:http')
 const crypto = require('node:crypto')
 
-const PROJECT = 'c-lawd-code'
+const PROJECT = 'clawd-code'
 const REPO = process.env.CLAWD_REPO || 'Barmanji/ClaudeCode'
 const VERSION = require('../package.json').version
+
 const RELEASE_BASE = (
   process.env.CLAWD_RELEASE_BASE || `https://github.com/${REPO}/releases/download`
 ).replace(/\/$/, '')
@@ -28,7 +29,7 @@ function cacheRoot() {
   return path.join(process.env.XDG_CACHE_HOME || path.join(os.homedir(), '.cache'), PROJECT)
 }
 
-function fetchBuffer(url, redirects = 5) {
+async function fetchBuffer(url, redirects = 5) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('http://') ? http : https
     client
@@ -63,12 +64,15 @@ async function ensureBinary() {
     )
   }
 
+  // GoReleaser publishes the Windows binary as clawd_windows_amd64.exe.
+  const exe = process.platform === 'win32' ? '.exe' : ''
   const dir = path.join(cacheRoot(), `v${VERSION}`)
-  const dest = path.join(dir, process.platform === 'win32' ? 'clawd.exe' : 'clawd')
+  const dest = path.join(dir, `clawd${exe}`)
   if (fs.existsSync(dest)) return dest
 
-  const asset = `clawd_${GOOS}_${GOARCH}`
+  const asset = `clawd_${GOOS}_${GOARCH}${exe}`
   const base = `${RELEASE_BASE}/v${VERSION}`
+
   process.stderr.write(`downloading ${PROJECT} v${VERSION} (${asset})…\n`)
 
   const [binary, checksums] = await Promise.all([

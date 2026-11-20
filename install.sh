@@ -11,7 +11,7 @@
 set -eu
 
 REPO="${CLAWD_REPO:-Barmanji/ClaudeCode}"
-PROJECT="c-lawd-code"
+PROJECT="clawd-code"
 BIN="clawd"
 
 info() { printf '  %s\n' "$*" >&2; }
@@ -45,7 +45,7 @@ os=$(uname -s)
 case "$os" in
 	Linux) os=linux ;;
 	Darwin) os=darwin ;;
-	*) fail "unsupported OS: $os (on Windows use: npm install -g c-lawd-code)" ;;
+	*) fail "unsupported OS: $os (on Windows use: npm install -g clawd-code)" ;;
 esac
 
 arch=$(uname -m)

@@ -63,7 +63,7 @@ func run(args []string) int {
 		case "models":
 			return cmdModels()
 		case "version", "--version", "-v":
-			fmt.Printf("c-lawd-code %s\n", version)
+			fmt.Printf("clawd-code %s\n", version)
 			return 0
 		case "help", "--help", "-h":
 			fmt.Print(usage)
@@ -142,7 +142,7 @@ func cmdRun(args []string) int {
 	lspState := connectLSP()
 
 	fmt.Fprintf(os.Stderr, "%s · %s/%s\n",
-		dim("c-lawd-code "+version), settings.Provider.ID, settings.Model)
+		dim("clawd-code "+version), settings.Provider.ID, settings.Model)
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()

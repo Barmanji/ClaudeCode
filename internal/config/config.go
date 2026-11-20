@@ -13,7 +13,7 @@ import (
 const AppName = "C-Lawd Code"
 
 // DirName is used for the config directory and npm package prefix.
-const DirName = "c-lawd-code"
+const DirName = "clawd-code"
 
 // EnvPrefix is the prefix for every override this CLI understands.
 const EnvPrefix = "CLAWD"

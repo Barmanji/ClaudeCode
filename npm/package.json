@@ -1,5 +1,5 @@
 {
-  "name": "c-lawd-code",
+  "name": "clawd-code",
   "version": "__VERSION__",
   "description": "C-Lawd Code — a tiny LLM coding agent for your terminal",
   "keywords": [
@@ -33,10 +33,10 @@
     "node": ">=18"
   },
   "optionalDependencies": {
-    "c-lawd-code-linux-x64": "__VERSION__",
-    "c-lawd-code-linux-arm64": "__VERSION__",
-    "c-lawd-code-darwin-x64": "__VERSION__",
-    "c-lawd-code-darwin-arm64": "__VERSION__",
-    "c-lawd-code-win32-x64": "__VERSION__"
+    "clawd-code-linux-x64": "__VERSION__",
+    "clawd-code-linux-arm64": "__VERSION__",
+    "clawd-code-darwin-x64": "__VERSION__",
+    "clawd-code-darwin-arm64": "__VERSION__",
+    "clawd-code-win32-x64": "__VERSION__"
   }
 }

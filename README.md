@@ -16,7 +16,7 @@ All three paths install the same binary (`clawd`).
 
 ```sh
 # npm — Node 18+, no build step
-npm install -g c-lawd-code
+npm install -g clawd-code
 
 # curl — Linux and macOS, verifies the release checksum
 curl -fsSL https://raw.githubusercontent.com/Barmanji/ClaudeCode/main/install.sh | sh
@@ -38,8 +38,8 @@ you execute a prompt without credentials.
    saved.
 3. Pick a model from the provider's live `/models` catalogue, or type any model ID.
 
-The result lands in `c-lawd-code/config.json` inside your OS config directory
-(`~/.config/c-lawd-code/config.json` on Linux), with `0600` permissions.
+The result lands in `clawd-code/config.json` inside your OS config directory
+(`~/.config/clawd-code/config.json` on Linux), with `0600` permissions.
 
 If you already have a key exported, you can skip setup entirely — the agent
 detects it on first run:
@@ -88,7 +88,7 @@ then the provider's own key variable, then the config file.
 ## Skills
 
 Any directory matching `.claude/skills/<name>/SKILL.md` in the working directory
-(or `~/.config/c-lawd-code/skills/`) is exposed to the model as a `Skill` tool.
+(or `~/.config/clawd-code/skills/`) is exposed to the model as a `Skill` tool.
 Frontmatter supports `name`, `description`, `context: fork`, and `agent`.
 
 ```

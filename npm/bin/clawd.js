@@ -5,7 +5,7 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { spawn } = require('node:child_process')
 
-const PACKAGE = 'c-lawd-code'
+const PACKAGE = 'clawd-code'
 const EXE = process.platform === 'win32' ? 'clawd.exe' : 'clawd'
 
 function platformBinary() {

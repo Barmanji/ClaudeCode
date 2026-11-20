@@ -1,6 +1,6 @@
 version: 2
 
-project_name: c-lawd-code
+project_name: clawd-code
 
 before:
   hooks:

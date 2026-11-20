@@ -16,6 +16,7 @@ fi
 VERSION="${VERSION#v}"
 
 REPO="${CLAWD_REPO:-Barmanji/ClaudeCode}"
+PROJECT="clawd-code"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DIST="$ROOT/npm/dist"
 
@@ -50,26 +51,25 @@ PLATFORMS=(
 
 for entry in "${PLATFORMS[@]}"; do
 	read -r goos goarch npm_os npm_cpu <<<"$entry"
-	pkg="c-lawd-code-${npm_os}-${npm_cpu}"
+	pkg="${PROJECT}-${npm_os}-${npm_cpu}"
 	dir="$DIST/$pkg"
-	asset="clawd_${goos}_${goarch}"
 	mkdir -p "$dir/bin"
+
+	# GoReleaser appends .exe to the Windows raw binary.
+	exe=""
+	[[ "$goos" == "windows" ]] && exe=".exe"
+	asset="clawd_${goos}_${goarch}${exe}"
 
 	echo "==> $pkg"
 	gh release download "v$VERSION" --repo "$REPO" --pattern "$asset" --dir "$dir"
-	if [[ "$goos" == "windows" ]]; then
-		mv "$dir/$asset" "$dir/bin/clawd.exe"
-		chmod 0755 "$dir/bin/clawd.exe"
-	else
-		mv "$dir/$asset" "$dir/bin/clawd"
-		chmod 0755 "$dir/bin/clawd"
-	fi
+	mv "$dir/$asset" "$dir/bin/clawd${exe}"
+	chmod 0755 "$dir/bin/clawd${exe}"
 
 	cat >"$dir/package.json" <<EOF
 {
   "name": "$pkg",
   "version": "$VERSION",
-  "description": "Prebuilt binary for c-lawd-code ($goos/$goarch)",
+  "description": "Prebuilt binary for ${PROJECT} (${goos}/${goarch})",
   "homepage": "https://github.com/$REPO",
   "repository": { "type": "git", "url": "git+https://github.com/$REPO.git" },
   "license": "MIT",
@@ -82,10 +82,10 @@ EOF
 	publish_dir "$dir"
 done
 
-echo "==> c-lawd-code (launcher)"
+echo "==> $PROJECT (launcher)"
 sed "s/__VERSION__/$VERSION/g" "$ROOT/npm/package.json" >"$DIST/package.json"
 cp -R "$ROOT/npm/bin" "$ROOT/npm/lib" "$DIST/"
 cp "$ROOT/README.md" "$ROOT/LICENSE" "$DIST/"
 publish_dir "$DIST"
 
-echo "published c-lawd-code@$VERSION (dist-tag: $DIST_TAG)"
+echo "published $PROJECT@$VERSION (dist-tag: $DIST_TAG)"

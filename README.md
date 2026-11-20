@@ -16,7 +16,7 @@ All three paths install the same binary (`clawd`).
 
 ```sh
 # npm — Node 18+, no build step
-npm install -g clawd-code
+npm install -g @barmanji/clawd-code
 
 # curl — Linux and macOS, verifies the release checksum
 curl -fsSL https://raw.githubusercontent.com/Barmanji/ClaudeCode/main/install.sh | sh

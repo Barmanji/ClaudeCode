@@ -51,8 +51,9 @@ PLATFORMS=(
 
 for entry in "${PLATFORMS[@]}"; do
 	read -r goos goarch npm_os npm_cpu <<<"$entry"
-	pkg="${PROJECT}-${npm_os}-${npm_cpu}"
-	dir="$DIST/$pkg"
+	pkg="@barmanji/${PROJECT}-${npm_os}-${npm_cpu}"
+	# Scoped names contain a slash, which cannot be a directory name.
+	dir="$DIST/${npm_os}-${npm_cpu}"
 	mkdir -p "$dir/bin"
 
 	# GoReleaser appends .exe to the Windows raw binary.
@@ -82,10 +83,11 @@ EOF
 	publish_dir "$dir"
 done
 
-echo "==> $PROJECT (launcher)"
-sed "s/__VERSION__/$VERSION/g" "$ROOT/npm/package.json" >"$DIST/package.json"
-cp -R "$ROOT/npm/bin" "$ROOT/npm/lib" "$DIST/"
-cp "$ROOT/README.md" "$ROOT/LICENSE" "$DIST/"
-publish_dir "$DIST"
+echo "==> @barmanji/$PROJECT (launcher)"
+mkdir -p "$DIST/launcher"
+sed "s/__VERSION__/$VERSION/g" "$ROOT/npm/package.json" >"$DIST/launcher/package.json"
+cp -R "$ROOT/npm/bin" "$ROOT/npm/lib" "$DIST/launcher/"
+cp "$ROOT/README.md" "$ROOT/LICENSE" "$DIST/launcher/"
+publish_dir "$DIST/launcher"
 
-echo "published $PROJECT@$VERSION (dist-tag: $DIST_TAG)"
+echo "published @barmanji/$PROJECT@$VERSION (dist-tag: $DIST_TAG)"

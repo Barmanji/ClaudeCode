@@ -45,7 +45,7 @@ os=$(uname -s)
 case "$os" in
 	Linux) os=linux ;;
 	Darwin) os=darwin ;;
-	*) fail "unsupported OS: $os (on Windows use: npm install -g clawd-code)" ;;
+	*) fail "unsupported OS: $os (on Windows use: npm install -g @barmanji/clawd-code)" ;;
 esac
 
 arch=$(uname -m)

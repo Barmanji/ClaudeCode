@@ -5,7 +5,8 @@ const fs = require('node:fs')
 const path = require('node:path')
 const { spawn } = require('node:child_process')
 
-const PACKAGE = 'clawd-code'
+const PACKAGE = '@barmanji/clawd-code'
+const DISPLAY = 'clawd-code'
 const EXE = process.platform === 'win32' ? 'clawd.exe' : 'clawd'
 
 function platformBinary() {
@@ -25,7 +26,7 @@ async function main() {
 
   // Avoid a multi-megabyte download just to print the version.
   if (args.length === 1 && (args[0] === '--version' || args[0] === '-v')) {
-    console.log(`${PACKAGE} ${require('../package.json').version}`)
+    console.log(`${DISPLAY} ${require('../package.json').version}`)
     return
   }
 

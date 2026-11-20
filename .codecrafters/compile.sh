@@ -1,5 +1,4 @@
 #!/bin/sh
-#
 # This script is used to compile your program on CodeCrafters
 #
 # This runs before .codecrafters/run.sh
@@ -8,4 +7,4 @@
 
 set -e # Exit on failure
 
-go build -o /tmp/codecrafters-build-claude-code-go app/*.go
+go build -o /tmp/codecrafters-build-claude-code-go ./cmd/clawd

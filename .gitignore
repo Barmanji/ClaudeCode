@@ -1,0 +1,14 @@
+# Build output
+/dist/
+/npm/dist/
+/clawd
+/clawd.exe
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Local config and scratch files
+.clawd/
+*.local
+.DS_Store
